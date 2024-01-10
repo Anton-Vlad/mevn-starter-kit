@@ -40,6 +40,16 @@ app.use(errorHandlerMiddleware)
 // Routes
 app.use("/api/auth", require('./routes/api/auth'))
 
+// Default Route
+app.all("*", (req, res) => {
+    res.status(404)
+
+    if (req.accepts('json')) {
+        res.json({'error': '404 Not Found'})
+    } else {
+        res.type('text').send('404 Not Found')
+    }
+})
 
 app.listen(PORT, () => {
     console.log(`Listening to port ${PORT}`)
