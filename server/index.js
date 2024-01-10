@@ -37,6 +37,10 @@ app.use("/static", express.static(path.join(__dirname, 'public')))
 app.use(errorHandlerMiddleware)
 
 
+// Routes
+app.use("/api/auth", require('./routes/api/auth'))
+
+
 app.listen(PORT, () => {
     console.log(`Listening to port ${PORT}`)
 })
