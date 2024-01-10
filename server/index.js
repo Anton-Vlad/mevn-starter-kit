@@ -1,4 +1,4 @@
-require('dotenv').config
+require('dotenv').config()
 
 const express = require("express")
 const cors = require("cors")
@@ -51,6 +51,10 @@ app.all("*", (req, res) => {
     }
 })
 
-app.listen(PORT, () => {
-    console.log(`Listening to port ${PORT}`)
+
+mongoose.connection.once("open", () => {
+    console.log("DB connected")
+    app.listen(PORT, () => {
+        console.log(`Listening to port ${PORT}`)
+    })
 })
