@@ -6,9 +6,17 @@ const corsOptions = require("./config/cors")
 const cookieParser = require("cookie-parser")
 const mongoose = require("mongoose")
 const path = require("path")
+const connectDB = require("./config/database")
+const credentials = require("./middleware/credetials")
+const errorHandlerMiddleware = require("./middleware/error_handler")
 
 const app = express()
 const PORT = 3500
+
+connectDB()
+
+// Allow Credentials 
+app.use(credentials)
 
 // CORS
 app.use(cors(corsOptions))
@@ -25,7 +33,8 @@ app.use(cookieParser())
 // static files
 app.use("/static", express.static(path.join(__dirname, 'public')))
 
-
+//  Default error handler
+app.use(errorHandlerMiddleware)
 
 
 app.listen(PORT, () => {
