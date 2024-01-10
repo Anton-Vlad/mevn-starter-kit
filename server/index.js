@@ -2,12 +2,16 @@ require('dotenv').config
 
 const express = require("express")
 const cors = require("cors")
+const corsOptions = require("./config/cors")
 const cookieParser = require("cookie-parser")
 const mongoose = require("mongoose")
 const path = require("path")
 
 const app = express()
 const PORT = 3500
+
+// CORS
+app.use(cors(corsOptions))
 
 // application.x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
