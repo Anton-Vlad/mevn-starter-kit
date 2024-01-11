@@ -31,7 +31,9 @@ const UserSchema = Schema(
             required: true,
             min: 6
         },
-        refresh_token: String
+        refresh_token: String,
+        created_at: { type: Date, default: Date.now },
+        updated_at: { type: Date, default: Date.now },
     }
 )
 
@@ -44,5 +46,10 @@ UserSchema.virtual('id').get(function () {
 
 UserSchema.set('toObject', { virtuals: true });
 UserSchema.set('toJSON', { virtuals: true });
+
+UserSchema.pre('save', function (next) {
+    this.updated_at = new Date();
+    next();
+});
 
 module.exports = mongoose.model('User', UserSchema)
