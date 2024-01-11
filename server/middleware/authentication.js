@@ -17,7 +17,7 @@ function authentication (req, res, next) {
             const user = await User.findById(decoded.id).select({ password: 0, refresh_token: 0}).exec()
 
             if (user) {
-                req.user = user.toObject({ getters: true })
+                req.user = user.toObject({ getters: true, virtuals: true })
             } else {
                 req.user = {}
             }
