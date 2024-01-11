@@ -9,6 +9,7 @@ const path = require("path")
 const connectDB = require("./config/database")
 const credentials = require("./middleware/credetials")
 const errorHandlerMiddleware = require("./middleware/error_handler")
+const authentication = require('./middleware/authentication')
 
 const app = express()
 const PORT = 3500
@@ -17,6 +18,7 @@ connectDB()
 
 // Allow Credentials 
 app.use(credentials)
+app.use(authentication)
 
 // CORS
 app.use(cors(corsOptions))

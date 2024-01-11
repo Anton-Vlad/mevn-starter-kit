@@ -35,7 +35,7 @@ const UserSchema = Schema(
     },
     {
         virtual: {
-            full_name: {
+            full: {
                 get() {
                     return this.first_name + ' ' + this.last_name
                 }

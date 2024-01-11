@@ -131,7 +131,10 @@ async function refresh(req, res) {
     )
 }
 async function user(req, res) {
-    res.sendStatus(200)
+
+    const user = req.user
+
+    res.status(200).json(user)
 }
 
 module.exports = {register, login, logout, refresh, user}
