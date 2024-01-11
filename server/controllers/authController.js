@@ -51,7 +51,7 @@ async function login(req, res) {
 
     const accessToken = jwt.sign(
         {
-            username: user.username
+            id: user.id
         },
         process.env.ACCESS_TOKEN_SECRET,
         {
@@ -61,7 +61,7 @@ async function login(req, res) {
 
     const refreshToken = jwt.sign(
         {
-            username: user.username
+            id: user.id
         },
         process.env.REFRESH_TOKEN_SECRET,
         {
@@ -98,7 +98,37 @@ async function logout(req, res) {
     res.sendStatus(204)
 }
 async function refresh(req, res) {
-    res.sendStatus(200)
+    const cookies = req.cookies
+
+    if (!cookies.refresh_token) {
+        return res.sendStatus(401)
+    }
+
+    const refreshToken = cookies.refresh_token
+
+    const user = await User.findOne({refresh_token: refreshToken}).exec()
+
+    if (!user) {
+        res.sendStatus(403)
+    }
+
+    jwt.verify(
+        refreshToken,
+        process.env.REFRESH_TOKEN_SECRET,
+        (err, decoded) => {
+            if (err || user.id !== decoded.id) {
+                return res.sendStatus(403)
+            }
+
+            const accessToken = jwt.sign(
+                { id: decoded.id },
+                process.env.ACCESS_TOKEN_SECRET,
+                { expiresIn: '1800s' }
+            )
+
+            res.json({access_token: accessToken})
+        }
+    )
 }
 async function user(req, res) {
     res.sendStatus(200)
