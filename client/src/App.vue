@@ -5,14 +5,14 @@ import SideBarVue from './components/SideBar.vue';
 </script>
 
 <template>
-  <v-app>
-    <NavBarVue />
-
-    <!-- <SideBarVue /> -->
-    
-    <v-main>
-      <router-view></router-view>
-    </v-main>
-  </v-app>
+    <v-app>
+      <!-- <NavBarVue />
+  
+      <SideBarVue /> -->
+      
+        <!-- <v-container> -->
+          <router-view></router-view>
+        <!-- </v-container> -->
+    </v-app>
 </template>
 

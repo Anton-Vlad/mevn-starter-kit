@@ -3,7 +3,9 @@
 </script>
 
 <template>
-    <h1>
-      Home page
-    </h1>
+  
+    <v-main>
+      Your dashboard content here
+    </v-main>
+
 </template>

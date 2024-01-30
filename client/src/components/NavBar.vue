@@ -1,21 +1,21 @@
 <template>
     <v-app-bar app>
       <v-toolbar >
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-        <!-- <v-img src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-text-light.svg" max-height="40" /> -->
+        <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
 
 
-        <v-toolbar-title>Vuetify</v-toolbar-title>
+        <v-toolbar-title>
+            <img src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-text-light.svg" alt="Logo" height="40px">
+        </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
-        <v-btn>
+        <!-- <v-btn>
             <router-link to="/login">Login</router-link>
         </v-btn>
         <v-btn>
             <router-link to="/register">Register</router-link>
-        </v-btn>
+        </v-btn> -->
         <v-menu :location="'bottom'">
             <template v-slot:activator="{ props }">
                 <v-btn append-icon="mdi-menu-down" v-bind="props">
